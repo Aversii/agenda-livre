@@ -1,13 +1,13 @@
 package com.aversi.agendalivre;
-
-import java.util.Arrays;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.aversi.agendalivre.domain.entity.ProductModel;
+import com.aversi.agendalivre.domain.entity.ServiceModel;
 import com.aversi.agendalivre.domain.entity.UserModel;
 import com.aversi.agendalivre.service.EncodeService;
 
@@ -34,39 +34,23 @@ public class AgendalivreApplication {
 
 
 
-        /* product test */
-        ProductModel product = ProductModel.create(
-            "123e4567-e89b-12d3-a456-426614174000", // ownerId
-            "Eletrônicos",
-            "Smartphone XYZ",
-            "Um smartphone moderno com câmera de alta resolução.",
-            2024,
-            "Tech Corp",
-            3999.99,
-            Arrays.asList("img1.jpg", "img2.jpg")
+
+          ServiceModel service = ServiceModel.create(
+            "provider-123",
+            "Corte de Cabelo",
+            "Corte de cabelo masculino com tesoura e máquina.",
+            new BigDecimal("50.00"),
+            LocalDateTime.of(2025, 3, 20, 15, 30) // Data e hora do serviço
         );
 
-        // Exibindo os detalhes do produto
-        System.out.println("Produto criado:");
-        System.out.println("ID: " + product.getId());
-        System.out.println("Dono do Produto (Owner ID): " + product.getOwnerId());
-        System.out.println("Categoria: " + product.getCategory());
-        System.out.println("Nome: " + product.getName());
-        System.out.println("Descrição: " + product.getDescription());
-        System.out.println("Ano de Lançamento: " + product.getYearOfRelease());
-        System.out.println("Autor: " + product.getAuthor());
-        System.out.println("Preço: R$ " + product.getPrice());
-        System.out.println("Imagens: " + product.getImgs());
-        System.out.println("Criado em: " + product.getCreatedAt());
-
-        // Atualizando alguns dados do produto
-        product.update(null, "Smartphone XYZ Pro", null, null, "Tech Corp International", 4199.99, null);
-
-        // Exibindo os detalhes atualizados do produto
-        System.out.println("\nProduto atualizado:");
-        System.out.println("Nome: " + product.getName());
-        System.out.println("Autor: " + product.getAuthor());
-        System.out.println("Preço: R$ " + product.getPrice());
-        System.out.println("Atualizado em: " + product.getUpdatedAt());
+        System.out.println("Serviço criado:");
+        System.out.println("ID: " + service.getId());
+        System.out.println("Prestador: " + service.getProviderId());
+        System.out.println("Nome: " + service.getName());
+        System.out.println("Descrição: " + service.getDescription());
+        System.out.println("Preço: R$ " + service.getPrice());
+        System.out.println("Data e Hora: " + service.getServiceDateTime());
+        System.out.println("Criado em: " + service.getCreatedAt());
+  
     }
 }
