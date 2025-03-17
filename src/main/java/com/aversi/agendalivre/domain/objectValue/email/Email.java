@@ -1,14 +1,23 @@
 package com.aversi.agendalivre.domain.objectValue.email;
 
 import java.util.regex.Pattern;
-import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
+import jakarta.persistence.Embeddable;
+
+import java.util.Objects;
+@Embeddable
 public class Email {
     private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
-    
-    private final String address;
 
+    private String address; // Remover o `final` para permitir a desserialização
+
+    protected Email() { // Construtor padrão para o Jackson
+    }
+
+    @JsonCreator
     public Email(String address) {
         if (!isValidAddress(address)) {
             throw new IllegalArgumentException("Endereço de e-mail inválido");
@@ -19,7 +28,7 @@ public class Email {
     public String getAddress() {
         return address;
     }
-     
+
     private boolean isValidAddress(String address) {
         return address != null && EMAIL_PATTERN.matcher(address).matches();
     }

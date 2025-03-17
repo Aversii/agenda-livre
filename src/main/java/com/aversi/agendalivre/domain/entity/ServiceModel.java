@@ -4,8 +4,13 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class ServiceModel {
 
+    @Id
     private String id;
     private String providerId;
     private String name;

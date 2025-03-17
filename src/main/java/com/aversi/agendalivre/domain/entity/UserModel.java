@@ -2,13 +2,19 @@ package com.aversi.agendalivre.domain.entity;
 
 import com.aversi.agendalivre.domain.objectValue.email.Email;
 import com.aversi.agendalivre.domain.objectValue.password.Password;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Entity
 public class UserModel {
 
+    @Id
     private String id;
     private String firstName;
     private String lastName;
@@ -17,6 +23,7 @@ public class UserModel {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    protected UserModel(){};
     private UserModel(String id, String firstName, String lastName, Email email, Password password, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.firstName = firstName;
@@ -34,7 +41,7 @@ public class UserModel {
             firstName,
             lastName,
             new Email(email),
-            new Password(password, passwordEncoder),
+            new Password(password, passwordEncoder), // Encoding password here
             now,
             now
         );
